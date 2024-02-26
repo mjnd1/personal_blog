@@ -19,3 +19,53 @@ h1 {
   margin: 1rem 0;
   font-size: 2.5rem;
 }
+
+/* 移动优先设计
+ * 首先定义在较小屏幕尺寸上应该渲染的布局！较小的屏幕尺寸需要更简单的布局，
+ * 然后，调整你的样式以适应较大的设备。如果你先设计复杂情况，
+ * 那么接下来你反而要努力将其简化。
+*/
+
+/* 导航样式 */
+.nav-links {
+  width: 100%;
+  top: 5rem;
+  left: 48px;
+  background-color: #ff9776;
+  display: none;
+  margin: 0;
+}
+
+.nav-links a {
+  display: block;
+  text-align: center;
+  padding: 10px 0;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  background-color: #ff9776;
+}
+
+.expanded {
+  display: unset;
+}
+
+@media screen and (min-width: 636px) {
+  .nav-links {
+    margin-left: 5em;
+    display: block;
+    position: static;
+    width: auto;
+    background: none;
+  }
+
+  .nav-links a {
+    display: inline-block;
+    padding: 15px 20px;
+  }
+}
