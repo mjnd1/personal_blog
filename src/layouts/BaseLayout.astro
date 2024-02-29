@@ -1,0 +1,32 @@
+---
+import SpeedInsights from '@vercel/speed-insights/astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import '../styles/global.css'
+
+const { pageTitle } = Astro.props
+---
+
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Header />
+    <h1>{pageTitle}</h1>
+    <!-- <slot /> 允许你将写在开放和闭合 <Component></Component> 标签之间的子内容注入（或者说是「插入」）到任何 Component.astro 文件中。  -->
+    <slot />
+    <Footer />
+
+    <SpeedInsights />
+
+    <!-- 添加script标签 -->
+    <script>
+      import '../scripts/menu.js'
+    </script>
+  </body>
+</html>
