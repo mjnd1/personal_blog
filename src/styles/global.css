@@ -87,3 +87,13 @@ h1 {
     display: none;
   }
 }
+
+/* 主题 */
+html.dark {
+  background-color: #0d0950;
+  color: #fff;
+}
+
+.dark .nav-links a {
+  color: #fff;
+}
