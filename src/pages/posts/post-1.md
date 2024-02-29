@@ -3,7 +3,7 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 # 声明变量
 title: 'My First Blog Post'
-pubData: 2022-08-08
+pubDate: 2022-08-08
 description: 'This is the first post of my new Astro blog.'
 author: 'Astro Learner'
 image:
