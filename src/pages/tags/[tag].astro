@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import BlogPost from '../../components/BlogPost.astro'
+// https://docs.astro.build/zh-cn/tutorial/5-astro-api/2/
+// getStaticPaths 函数返回一个页面路由数组，这些页面将使用文件中定义的相同模板。
+// 通过 http://localhost:4321/tags/astro 来访问每个创建的页面
+// 它是从 [tag].astro 动态生成的。检查是否还为每个标签创建了页面，
+// 例如 /tags/successes、/tags/community、/tags/learning%20in%20public 等，或者你自定义的标签
+export async function getStaticPaths() {
+  // 获取使用的 .md 文件
+  const allPosts = await Astro.glob('../posts/*.md')
+  return [
+    // 为数组中的每个路由都添加新的 props，并将这些 props 在函数之外的组件模板中可用
+    // 1.添加 props：posts 变量
+    { params: { tag: 'astro' }, props: { posts: allPosts } },
+    { params: { tag: 'successes' }, props: { posts: allPosts } },
+    { params: { tag: 'community' }, props: { posts: allPosts } },
+    { params: { tag: 'blogging' }, props: { posts: allPosts } },
+    { params: { tag: 'setbacks' }, props: { posts: allPosts } },
+    { params: { tag: 'learning in public' }, props: { posts: allPosts } },
+  ]
+}
+
+const { tag } = Astro.params
+// 2.在 props 中获取使用
+const { posts } = Astro.props
+// 3.根据每个文章的 tags 属性来过滤出：只包含当前 tag 标签的文章
+const filteredPosts = posts.filter((post) =>
+  post.frontmatter.tags?.includes(tag)
+)
+---
+
+<BaseLayout pageTitle={tag}>
+  <p>包含 「{tag}」标签的文章</p>
+  <!-- 显示包含了 tag 的文章 -->
+  <ul>
+    {
+      filteredPosts.map((post) => (
+        <BlogPost url={post.url} title={post.frontmatter.title} />
+      ))
+    }
+  </ul>
+</BaseLayout>
